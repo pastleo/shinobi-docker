@@ -2,6 +2,8 @@ FROM node:20-bullseye-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+ARG SHINOBI_BRANCH=dev
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
@@ -10,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     default-mysql-client \
     && rm -rf /var/lib/apt/lists/*  # Clean up to reduce image size
 
-RUN git clone https://gitlab.com/Shinobi-Systems/Shinobi.git /opt/shinobi
+RUN git clone --single-branch --branch $SHINOBI_BRANCH https://gitlab.com/Shinobi-Systems/Shinobi.git /opt/shinobi
+
 WORKDIR /opt/shinobi
 RUN npm install && npm install pm2 -g
 

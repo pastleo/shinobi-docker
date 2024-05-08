@@ -13,7 +13,10 @@ services:
     restart: unless-stopped
 
   shinobi:
-    build: .
+    build:
+      context: .
+      args:
+        SHINOBI_BRANCH: dev
     depends_on:
       - shinobi-sql
     volumes:

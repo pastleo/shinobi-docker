@@ -1,5 +1,14 @@
 #!/bin/bash
 
+##############
+until mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1"; do
+  >&2 echo "..."
+  sleep 1
+done
+
+>&2 echo "MySQL is up - executing command"
+##############
+
 mkdir -p /home/Shinobi && cp -a -R /opt/shinobi/. /home/Shinobi
 
 if [ ! -e "/home/Shinobi/conf.json" ]; then
