@@ -17,7 +17,7 @@ docker-latest-build:
       export IMAGE_NAME="$CI_REGISTRY_IMAGE:${BRANCH_PREFIX}${ARCH_TYPE}"
       echo "Running on branch '${CI_COMMIT_BRANCH}', Image: ${IMAGE_NAME}" ;
 
-    - docker build --pull --build-arg --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
+    - docker build --pull --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
     - docker push "${IMAGE_NAME}"
   rules:
     - if: $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "main" && $CI_COMMIT_BRANCH != "dev"
@@ -45,7 +45,7 @@ docker-arm32v7-build:
       export IMAGE_NAME="$CI_REGISTRY_IMAGE:${BRANCH_PREFIX}${ARCH_TYPE}"
       echo "Running on branch '${CI_COMMIT_BRANCH}', Image: ${IMAGE_NAME}" ;
 
-    - docker build --pull --build-arg --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
+    - docker build --pull --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
     - docker push "${IMAGE_NAME}"
   rules:
     - if: $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "main" && $CI_COMMIT_BRANCH != "dev"
@@ -73,7 +73,7 @@ docker-arm64v8-build:
       export IMAGE_NAME="$CI_REGISTRY_IMAGE:${BRANCH_PREFIX}${ARCH_TYPE}"
       echo "Running on branch '${CI_COMMIT_BRANCH}', Image: ${IMAGE_NAME}" ;
 
-    - docker build --pull --build-arg --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
+    - docker build --pull --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
     - docker push "${IMAGE_NAME}"
   rules:
     - if: $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "main" && $CI_COMMIT_BRANCH != "dev"
@@ -101,7 +101,7 @@ docker-nvidia-build:
       export IMAGE_NAME="$CI_REGISTRY_IMAGE:${BRANCH_PREFIX}${ARCH_TYPE}"
       echo "Running on branch '${CI_COMMIT_BRANCH}', Image: ${IMAGE_NAME}" ;
 
-    - docker build --pull --build-arg --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
+    - docker build --pull --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "${IMAGE_NAME}" . -f "Dockerfile"
     - docker push "${IMAGE_NAME}"
   rules:
     - if: $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "main" && $CI_COMMIT_BRANCH != "dev"
