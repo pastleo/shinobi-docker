@@ -2,7 +2,7 @@
 
 ##############
 until mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1"; do
-  >&2 echo "..."
+  >&2 echo "MySQL is currently unavailable - retrying..."
   sleep 1
 done
 
