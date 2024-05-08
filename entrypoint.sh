@@ -34,6 +34,8 @@ EOF
 )
 echo "Setting Database"
 echo $DB_CONFIG
+git reset --hard
+git pull
 node tools/modifyConfiguration.js addToConfig="{\"db\": $DB_CONFIG}"
 
 pm2 flush
