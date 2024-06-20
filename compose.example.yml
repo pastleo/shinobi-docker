@@ -1,0 +1,36 @@
+services:
+  shinobi:
+    build:
+      context: .
+      args:
+        SHINOBI_BRANCH: 8f0dd984a4f3951b82efacc075447ba22453ff39
+    volumes:
+      - /dev/shm/ShinobiRAM:/dev/shm/streams
+      - ./Shinobi:/home/Shinobi
+    environment:
+      - HOME=/home/Shinobi
+      - DB_HOST=shinobi-sql
+    env_file: .env
+    restart: unless-stopped
+    depends_on: [shinobi-sql]
+  shinobi-sql:
+    image: biarms/mysql:5.7
+    # https://github.com/biarms/mysql for ARM build
+    volumes:
+      - ./ShinobiSQL:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    env_file: .env
+    restart: unless-stopped
+  oauth2-proxy:
+    image: "quay.io/oauth2-proxy/oauth2-proxy:v7.6.0"
+    # image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0-arm64
+    environment:
+      OAUTH2_PROXY_HTTP_ADDRESS: http://:8080
+      OAUTH2_PROXY_UPSTREAMS: http://shinobi:8080
+      OAUTH2_PROXY_AUTHENTICATED_EMAILS_FILE: /allowed/emails
+    env_file: .env
+    ports:
+      - xxxx:8080
+    volumes:
+      - ./allowed:/allowed
+    restart: unless-stopped
