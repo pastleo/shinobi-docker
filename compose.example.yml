@@ -23,7 +23,6 @@ services:
     restart: unless-stopped
   oauth2-proxy:
     image: "quay.io/oauth2-proxy/oauth2-proxy:v7.6.0"
-    # image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0-arm64
     environment:
       OAUTH2_PROXY_HTTP_ADDRESS: http://:8080
       OAUTH2_PROXY_UPSTREAMS: http://shinobi:8080
