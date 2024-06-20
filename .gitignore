@@ -2,3 +2,4 @@ compose.yml
 .env
 Shinobi/
 ShinobiSQL/
+allowed/

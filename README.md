@@ -1,29 +1,28 @@
+from https://gitlab.com/Shinobi-Systems/ShinobiDocker
+
 # Install Shinobi with Docker
-#### 2024-05-07
 
-# Quick Install
+```bash
+git clone https://github.com/pastleo/shinobi-docker.git shinobi
+cd shinobi
+cp compose.example.yml compose.yml
+vim compose.yml
+cp .env.example .env
+vim .env
 
-1. Run this in terminal.
+mkdir Shinobi
+cp super.sample.json Shinobi/super.json
+vim Shinobi/super.json # pass: md5sum
+
+mkdir allowed
+echo 'user1@example.com' >> allowed/emails
+echo 'user2@example.com' >> allowed/emails
+
+docker-compose up -d && docker-compose logs -f --tail=300
 ```
-bash <(curl -s https://gitlab.com/Shinobi-Systems/Shinobi-Installer/raw/master/shinobi-docker.sh)
-```
 
-# Advanced Install
-
-1. Download this repository and enter it.
-    - If you **do not have Docker** installed run `sh INSTALL/docker.sh`.
-2. Review and modify the `docker-compose.yml` file.
-    - Leave it as-is for default setup.
-3. Run the preparation and starter script.
-    ```
-    bash setup_and_run.sh
-    ```
-
-# Once Installed
-
-You will be asked if you want to use the included database, default is Yes. Once complete open port 8080 of your Docker host in a web browser.
-
-> The following tables offer a breakdown of the configurations that control how the `shinobi` and `shinobi-sql` services are set up and interact within your Docker environment. Adjustments can be made to these values directly in the `docker-compose.yml` file to modify the behavior of the deployment as needed.
+> generate pass: `openssl rand -hex 12`
+> generate md5: `echo -n 'xxx' | md5sum`
 
 ### `docker-compose.yml` : `shinobi-sql` Service Environment Variables
 
