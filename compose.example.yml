@@ -12,7 +12,9 @@ services:
       - DB_HOST=shinobi-sql
     env_file: .env
     restart: unless-stopped
-    depends_on: [shinobi-sql]
+    depends_on:
+      shinobi-sql:
+        condition: service_healthy
   shinobi-sql:
     image: biarms/mysql:5.7
     # https://github.com/biarms/mysql for ARM build
@@ -21,6 +23,10 @@ services:
       - ./mysql-init:/docker-entrypoint-initdb.d
     env_file: .env
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "--password=$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      retries: 40
   oauth2-proxy:
     image: "quay.io/oauth2-proxy/oauth2-proxy:v7.6.0"
     environment:

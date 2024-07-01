@@ -1,4 +1,4 @@
-FROM node:20-bullseye-slim
+FROM node:18.18.2-buster
 
 ENV DEBIAN_FRONTEND=noninteractive
 
